@@ -1,24 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="work">Works log</h1>
-    {% for i in jobs %}
-        <h2 class="action">Action # {{i.id}}</h2>
-        <table>
-            <tr class="up">
-                <td>Title</td>
-                <td>Leader</td>
-                <td>Duration</td>
-                <td>List</td>
-                <td>Finished</td>
-            </tr>
-            <tr class="low">
-                <td>{{i.job}}</td>
-                <td>{{i.team_leader}}</td>
-                <td>{{i.work_size}} hours</td>
-                <td>{{i.collaborato}}</td>
-                <td>{{i.is_finished}}</td>
-            </tr>
-        </table>
-    {% endfor %}
+    <h1 class="mis">Adding a job</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.job.label }}<br class="mis">
+            {{ form.job(class="form-control", type="string") }}<br>
+            {% for error in form.job.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.team_leader.label }}<br>
+            {{ form.team_leader(class="form-control", type="integer") }}<br>
+            {% for error in form.team_leader.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.work_size.label }}<br>
+            {{ form.work_size(class="form-control", type="integer") }}<br>
+            {% for error in form.work_size.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.collaborators.label }}<br>
+            {{ form.collaborators(class="form-control", type="string") }}<br>
+            {% for error in form.collaborators.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>{{ form.is_finished() }} {{ form.is_finished.label }}</p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary log") }}</p>
+        <div>{{ message }}</div>
+    </form>
 {% endblock %}
